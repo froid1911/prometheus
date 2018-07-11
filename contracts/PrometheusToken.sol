@@ -14,8 +14,8 @@ contract PrometheusToken is StandardToken {
         data[msg.sender].push(Data({km: _km}));
     }
 
-    function getData(uint id) public returns (Data) {
-        return data[msg.sender][id];
+    function getData(address _user, uint id) public returns (Data) {
+        return data[_user][id];
     }
 
     function getDataLength(address _user) private returns (uint) {
