@@ -38,13 +38,6 @@ export class AppComponent {
     this.web3Service.getAccounts().subscribe(accs => {
       this.accounts = accs;
       this.account = this.accounts[0];
-
-      // This is run from window:load and ZoneJS is not aware of it we
-      // need to use _ngZone.run() so that the UI updates on promise resolution
-      this._ngZone.run(() => {
-
-
-      });
     }, err => alert(err))
   };
 
@@ -56,10 +49,12 @@ export class AppComponent {
     this.datasets = [];
     this.setStatus('Fetching Datasets... (please wait)');
 
+    // Fetch Balance of Account
     this.prometheusTokenService.getBalance(this.carAddress).then(result => {
       this.balance = result;
     })
 
+    // Fetch Datasets
     this.prometheusTokenService.getDataSets(this.carAddress).then(results => {
       this.datasets = results;
       this.setStatus('');
