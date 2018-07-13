@@ -34,4 +34,8 @@ contract PrometheusToken  {
         return data[_user].length;
     }
 
+    function getTokenAddress() public view returns (address) {
+        return address(token);
+    }
+
 }

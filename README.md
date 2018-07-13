@@ -17,7 +17,7 @@ dApp for collecting IoT Data.
 
 1. Run ``` truffle compile ``` to compile Contracts
 2. Run ``` truffle migrate --reset --network="rinkeby ``` to deploy on Rinkeby Network"
-3. Run ``` truffle migrate --reset ``` to deploy on localhost:8545 (First start Local Node e.g. ganache-cli)
+3. Run ``` truffle migrate --reset ``` to deploy on localhost:8545 (First, start Local Node e.g. ganache-cli)
 4. Run ``` truffle develop ``` or ``` truffle test``` to execute Truffle Tests
 
 ## Project Structure

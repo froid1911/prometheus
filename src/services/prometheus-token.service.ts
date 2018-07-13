@@ -26,8 +26,11 @@ export class PrometheusTokenService {
       this.prometheus = new this.web3.eth.Contract(prometheusArtifact.abi);
       this.prometheus.options.address = prometheusArtifact.networks[id].address
 
-      this.token = new this.web3.eth.Contract(tokenArtifact.abi);
-      this.token.options.address = '0xf06f1f338d810c01d33246e3f04d6981e353ad0d'; // Fetched from Etherscan
+      this.prometheus.methods.getTokenAddress().call().then((address: string) => {
+        this.token = new this.web3.eth.Contract(tokenArtifact.abi);
+        this.token.options.address = address; // Fetched from Etherscan
+      })
+
     })
 
   }
