@@ -20,10 +20,10 @@
     <div class="field">
       <label class="label">Address</label>
       <p class="control">
-        <input [(ngModel)]="sendingAmount" class="input" type="text" placeholder="95" name="sendingAmount" required #sendingAmountModel="ngModel">
+        <input [(ngModel)]="carAddress" class="input" type="text" placeholder="95" name="carAddress" required #carAddressModel="ngModel">
       </p>
-      <div *ngIf="sendingAmountModel.errors && (sendingAmountModel.dirty || sendingAmountModel.touched)" class="help is-danger">
-        <p [hidden]="!sendingAmountModel.errors.required">
+      <div *ngIf="carAddressModel.errors && (carAddressModel.dirty || carAddressModel.touched)" class="help is-danger">
+        <p [hidden]="!carAddressModel.errors.required">
           This field is required
         </p>
       </div>
@@ -31,13 +31,27 @@
 
     <div class="field is-grouped">
       <p class="control">
-        <button [disabled]="!coinForm.valid" (click)="sendCoin()" class="button is-primary">
+        <button [disabled]="!coinForm.valid" (click)="getDataSets()" class="button is-primary">
           Send
         </button>
       </p>
     </div>
   </form>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>KM</th>
+      <th>Battery Level</th>
+      <th>GPS</th>
+    </tr>
+    <tr *ngFor="let dataset of datasets; let i = index">
+      <td>{{i}}</td>
+      <td>{{dataset[0]}}</td>
+      <td>{{dataset[1]}}</td>
+      <td>{{dataset[2]}}</td>
+    </tr>
 
+  </table>
   <strong>Hint:</strong> open the browser developer console to view any errors and warnings.
 
 

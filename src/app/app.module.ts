@@ -4,11 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 
-import { MetaCoinService, Web3Service } from '../services/services'
-import { PrometheusTokenService } from 'services/prometheus-token.service';
+import { Web3Service, PrometheusTokenService } from '../services/services'
 
 const SERVICES = [
-  MetaCoinService,
   Web3Service,
   PrometheusTokenService
 ]

@@ -12,10 +12,10 @@ declare var window: any;
 @Injectable()
 export class Web3Service {
 
-	public web3: any;
+  public web3: any;
 
-  constructor() { 
-  	this.checkAndInstantiateWeb3();
+  constructor() {
+    this.checkAndInstantiateWeb3();
   }
 
   checkAndInstantiateWeb3 = () => {
@@ -26,6 +26,7 @@ export class Web3Service {
       );
       // Use Mist/MetaMask's provider
       this.web3 = new Web3(window.web3.currentProvider);
+      console.log(this.web3.version);
     } else {
       console.warn(
         'No web3 detected. Falling back to ${environment.HttpProvider}. You should remove this fallback when you deploy live, as it\'s inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask'
@@ -37,21 +38,31 @@ export class Web3Service {
     }
   };
 
-  getAccounts(): Observable<any>{
-  	return Observable.create(observer => {
-  	  this.web3.eth.getAccounts((err, accs) => {
-  	    if (err != null) {
-  	      observer.error('There was an error fetching your accounts.')
-  	    }
+  getAccounts(): Observable<any> {
+    return Observable.create(observer => {
+      this.web3.eth.getAccounts((err, accs) => {
+        if (err != null) {
+          observer.error('There was an error fetching your accounts.')
+        }
 
-  	    if (accs.length === 0) {
-  	      observer.error('Couldn\'t get any accounts! Make sure your Ethereum client is configured correctly.')
-  	    }
+        if (accs.length === 0) {
+          observer.error('Couldn\'t get any accounts! Make sure your Ethereum client is configured correctly.')
+        }
 
-  	    observer.next(accs)
-  	    observer.complete()
-  	  });
-  	})
+        observer.next(accs)
+        observer.complete()
+      });
+    })
+  }
+
+  getNetworkId(): Observable<number> {
+    return Observable.create(observer => {
+      this.web3.eth.net.getId().then(id => {
+        console.log(id);
+        observer.next(id)
+        observer.complete()
+      });
+    })
   }
 
 }

@@ -1,8 +1,8 @@
-import {MetaCoinService} from './meta-coin.service'
-import {Web3Service} from './web3.service'
+import { Web3Service } from './web3.service'
+import { PrometheusTokenService } from './prometheus-token.service';
 
 
 export {
-    MetaCoinService,
+    PrometheusTokenService,
     Web3Service,
-};
+}

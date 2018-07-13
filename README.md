@@ -1,4 +1,12 @@
-# Angular-Truffle
+# Prometheus
+
+## 
+
+## Setup
+
+1. Install NodeJS and NPM
+2. Execute ```npm install``` in Project directory
+3. Run ```ng serve``` to start the Webbrowser
 
 <p align="center">		
   <img src="https://github.com/Nikhil22/angular2-truffle-starter-dapp/blob/master/src/assets/logo.png">		

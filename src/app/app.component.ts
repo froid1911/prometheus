@@ -1,9 +1,7 @@
 import { Component, HostListener, NgZone } from '@angular/core';
 
-import { Web3Service, MetaCoinService } from '../services/services'
-
+import { Web3Service, PrometheusTokenService } from '../services/services'
 import { canBeNumber } from '../util/validation';
-import { PrometheusTokenService } from 'services/prometheus-token.service';
 
 declare var window: any;
 
@@ -22,11 +20,13 @@ export class AppComponent {
   recipientAddress: string;
   status: string;
   canBeNumber = canBeNumber;
+  carAddress = '0xe1b01597924979d001d4d9f6dd784fbb9306e099';
+
+  datasets: any[];
 
   constructor(
     private _ngZone: NgZone,
     private web3Service: Web3Service,
-    private metaCoinService: MetaCoinService,
     private prometheusTokenService: PrometheusTokenService
   ) {
     this.onReady();
@@ -42,33 +42,27 @@ export class AppComponent {
       // This is run from window:load and ZoneJS is not aware of it we
       // need to use _ngZone.run() so that the UI updates on promise resolution
       this._ngZone.run(() => {
-        this.refreshBalance();
-        setTimeout(() => {
-          this.prometheusTokenService.getData('0x584bfc3769d88078109277d1435f86c1051b770f', 0).then(console.log);
-        }, 100)
+
+
       });
     }, err => alert(err))
-  };
-
-
-  refreshBalance = () => {
-    this.metaCoinService.getBalance(this.account)
-      .subscribe(value => {
-        this.balance = value
-      }, e => { this.setStatus('Error getting balance; see log.') })
   };
 
   setStatus = message => {
     this.status = message;
   };
 
-  sendCoin = () => {
-    this.setStatus('Initiating transaction... (please wait)');
+  getDataSets = () => {
+    this.datasets = [];
+    this.setStatus('Fetching Datasets... (please wait)');
 
-    this.metaCoinService.sendCoin(this.account, this.recipientAddress, this.sendingAmount)
-      .subscribe(() => {
-        this.setStatus('Transaction complete!');
-        this.refreshBalance();
-      }, e => this.setStatus('Error sending coin; see log.'))
-  };
+    this.prometheusTokenService.getBalance(this.carAddress).then(result => {
+      this.balance = result;
+    })
+
+    this.prometheusTokenService.getDataSets(this.carAddress).then(results => {
+      this.datasets = results;
+      this.setStatus('');
+    });
+  }
 }
