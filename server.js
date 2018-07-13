@@ -2,7 +2,7 @@
 const Web3 = require('web3');
 const artifact = require('./build/contracts/PrometheusToken.json');
 
-// @TODO: Eigenen Private Key hinterlegen und vorher mit Ether befüllen
+// https://rinkeby.etherscan.io/address/0xe1b01597924979d001d4d9f6dd784fbb9306e099
 const privateKey = "0xd48550009e7fa0930429cfc24d8ad8f46eceea2e7cf5931671a07d566bd825f1"
 
 //const web3 = new Web3('http://localhost:8545'); // For Local Connect
@@ -11,27 +11,37 @@ const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://rinkeby.infura
 // Load Private Key and create Web3 JavaScript Account Object
 const account = web3.eth.accounts.privateKeyToAccount(privateKey);
 
+// Send and Signs Default Tx
 const sendAndSignTx = async () => {
+
+    // Get Network ID
     const id = await web3.eth.net.getId();
-    const txCount = await web3.eth.getTransactionCount(account.address);
+
+    // Intantiate Web3 Contract Object with Address from Truffle Contract Definition File
     const contract = new web3.eth.Contract(artifact.abi);
     contract.options.address = artifact.networks[id].address;
 
+    // Create Transaction
     const tx = {
         from: account.address,
         to: contract.options.address,
         data: contract.methods.addDataSet(5, 4, "50.1;14.10").encodeABI(), // Encodes the Method and Parameter into Hex 
-        gas: 3000000,
+        gas: await contract.methods.addDataSet(5, 4, "50.1;14.10").estimateGas(), // Estimates Gas for Method Execution
     };
 
-    account.signTransaction(tx).then((signedTx) => {
-        console.log(signedTx);
-        return web3.eth.sendSignedTransaction(signedTx.rawTransaction).on('receipt', console.log).on('error', console.error);;
+    // Sign Transaction with Web3 Account Object
+    const signedTx = await account.signTransaction(tx);
+    console.log("Signed Tx: " + signedTx.rawTransaction);
+
+    // Send signed Transaction with Web3 
+    web3.eth.sendSignedTransaction(signedTx.rawTransaction).then(receipt => {
+        console.log(receipt);
+        process.exit(0);
     })
 
 }
 
-sendAndSignTx();
+sendAndSignTx()
 
 
     // @TODO: Weitere Parameter
