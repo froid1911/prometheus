@@ -2,63 +2,92 @@ pragma solidity 0.4.24;
 
 import 'openzeppelin-solidity/contracts/token/ERC20/MintableToken.sol';
 
-contract PrometheusToken  {
+contract PrometheusToken is MintableToken {
 
     struct DataSet {
-        uint tripduration;
-        uint km;
-        uint vehicle_speed;
-        uint engine_load;
-        uint batteryLvl;
+        uint timestamp;
         string gps;
+        uint distance;
+        uint avgVehicleSpeed;
+        uint tripDuration;
+        uint countPassengers;
+        uint totalAcceleration;
+        uint avgEngineLoad;
+        uint batteryLvl;
+        bool driverGender;
+        uint birthYear;
     }
 
-    MintableToken token;
+    // Token token;
     mapping(address => DataSet[]) data;
 
-    constructor(address token) {
-        token = MintableToken(token); // PrometheusToken Contract is Owner (msg.sender) of Token and is therefore allowed to mint tokens
-    }
-
     function addDataSet(
-        uint _tripduration, 
-        uint _km, 
-        uint _vehicle_speed,
-        uint _engine_load, 
-        uint _batteryLvl, 
-        string _gps
+        uint _timestamp,
+        string _gps,
+        uint _distance,
+        uint _avgVehicleSpeed,
+        uint _tripDuration,
+        uint _countPassengers,
+        uint _totalAcceleration,
+        uint _avgEngineLoad,
+        uint _batteryLvl,
+        bool _driverGender,
+        uint _birthYear
     ) public returns (bool) {
-        data[msg.sender].push(DataSet(
-            _tripduration, 
-            _km, 
-            _vehicle_speed, 
-            _engine_load,
+        DataSet memory dataset = DataSet(
+            _timestamp,
+            _gps,
+            _distance,
+            _avgVehicleSpeed,
+            _tripDuration,
+            _countPassengers,
+            _totalAcceleration,
+            _avgEngineLoad,
             _batteryLvl,
-            _gps
-        )); // fahrzeug schreibt daten auf blockchain
-       
-        token.mint(msg.sender, 1); // Prometheustoken creates 1 new Token for supplied data
+            _driverGender,
+            _birthYear
+        );
+
+        data[msg.sender].push(dataset); // fahrzeug schreibt daten auf blockchain
+        mint(msg.sender, 1); // Prometheustoken creates 1 new Token for supplied data
 
         return true;
     }
 
-    function getDataSetOf(address _user, uint id) public returns (uint, uint, uint, uint, uint, string) {
+    function getDataSetOf(address _user, uint id) public returns (
+        uint,
+        string,
+        uint,
+        uint,
+        uint,
+        uint,
+        uint,
+        uint,
+        uint,
+        bool,
+        uint
+    ) {
+        
+        DataSet memory dataset = data[_user][id];
         return (
-            data[_user][id].tripduration,
-            data[_user][id].km,
-            data[_user][id].vehicle_speed,
-            data[_user][id].engine_load,
-            data[_user][id].batteryLvl,
-            data[_user][id].gps
+            dataset.timestamp,
+            dataset.gps,
+            dataset.distance,
+            dataset.avgVehicleSpeed,
+            dataset.tripDuration,
+            dataset.countPassengers,
+            dataset.totalAcceleration,
+            dataset.avgEngineLoad,
+            dataset.batteryLvl,
+            dataset.driverGender,
+            dataset.birthYear
         );
+
+        
     }
 
     function getDataLength(address _user) public returns (uint) {
         return data[_user].length;
-    }
-
-    function getTokenAddress() public view returns (address) {
-        return address(token);
     }
 
 }

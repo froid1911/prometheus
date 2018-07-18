@@ -2,45 +2,73 @@
   "contractName": "PrometheusToken",
   "abi": [
     {
-      "inputs": [
+      "constant": true,
+      "inputs": [],
+      "name": "mintingFinished",
+      "outputs": [
         {
-          "name": "token",
-          "type": "address"
+          "name": "",
+          "type": "bool"
         }
       ],
       "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "constructor"
+      "stateMutability": "view",
+      "type": "function"
     },
     {
       "constant": false,
       "inputs": [
         {
-          "name": "_tripduration",
-          "type": "uint256"
+          "name": "_spender",
+          "type": "address"
         },
         {
-          "name": "_km",
+          "name": "_value",
           "type": "uint256"
-        },
-        {
-          "name": "_vehicle_speed",
-          "type": "uint256"
-        },
-        {
-          "name": "_engine_load",
-          "type": "uint256"
-        },
-        {
-          "name": "_batteryLvl",
-          "type": "uint256"
-        },
-        {
-          "name": "_gps",
-          "type": "string"
         }
       ],
-      "name": "addDataSet",
+      "name": "approve",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
       "outputs": [
         {
           "name": "",
@@ -55,39 +83,19 @@
       "constant": false,
       "inputs": [
         {
-          "name": "_user",
+          "name": "_to",
           "type": "address"
         },
         {
-          "name": "id",
+          "name": "_amount",
           "type": "uint256"
         }
       ],
-      "name": "getDataSetOf",
+      "name": "mint",
       "outputs": [
         {
           "name": "",
-          "type": "uint256"
-        },
-        {
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "name": "",
-          "type": "string"
+          "type": "bool"
         }
       ],
       "payable": false,
@@ -98,15 +106,61 @@
       "constant": false,
       "inputs": [
         {
-          "name": "_user",
+          "name": "_spender",
+          "type": "address"
+        },
+        {
+          "name": "_subtractedValue",
+          "type": "uint256"
+        }
+      ],
+      "name": "decreaseApproval",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_owner",
           "type": "address"
         }
       ],
-      "name": "getDataLength",
+      "name": "balanceOf",
       "outputs": [
         {
           "name": "",
           "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "finishMinting",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
         }
       ],
       "payable": false,
@@ -116,11 +170,80 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "getTokenAddress",
+      "name": "owner",
       "outputs": [
         {
           "name": "",
           "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_spender",
+          "type": "address"
+        },
+        {
+          "name": "_addedValue",
+          "type": "uint256"
+        }
+      ],
+      "name": "increaseApproval",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "name": "_spender",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
         }
       ],
       "payable": false,
@@ -322,8 +445,8 @@
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_string_storage_ptr",
-                  "typeString": "string"
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
                 },
                 "typeName": {
                   "id": 87,
@@ -331,8 +454,8 @@
                   "nodeType": "ElementaryTypeName",
                   "src": "279:6:2",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_string_storage_ptr",
-                    "typeString": "string"
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
                   }
                 },
                 "value": null,
@@ -900,8 +1023,8 @@
                       "referencedDeclaration": 670,
                       "src": "1000:10:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$returns$_t_bool_$",
-                        "typeString": "function (address,uint256) external returns (bool)"
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$_t_bool_$",
+                        "typeString": "function (address,uint256) returns (bool)"
                       }
                     },
                     "id": 146,
@@ -1100,8 +1223,8 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
                   },
                   "typeName": {
                     "id": 119,
@@ -1109,8 +1232,112 @@
                     "nodeType": "ElementaryTypeName",
                     "src": "706:6:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 48,
+                  "name": "_avgEngineLoad",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 92,
+                  "src": "748:19:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 47,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "748:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 50,
+                  "name": "_batteryLvl",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 92,
+                  "src": "777:16:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 49,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "777:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 52,
+                  "name": "_driverGender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 92,
+                  "src": "803:18:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 51,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "803:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 54,
+                  "name": "_birthYear",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 92,
+                  "src": "831:15:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 53,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "831:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
                     }
                   },
                   "value": null,
@@ -1165,6 +1392,111 @@
               "nodeType": "Block",
               "src": "1217:265:2",
               "statements": [
+                {
+                  "assignments": [
+                    122
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 122,
+                      "name": "dataset",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 154,
+                      "src": "1662:22:0",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_DataSet_$27_memory_ptr",
+                        "typeString": "struct PrometheusToken.DataSet"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 121,
+                        "name": "DataSet",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 27,
+                        "src": "1662:7:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_DataSet_$27_storage_ptr",
+                          "typeString": "struct PrometheusToken.DataSet"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 128,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 123,
+                        "name": "data",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 32,
+                        "src": "1687:4:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_struct$_DataSet_$27_storage_$dyn_storage_$",
+                          "typeString": "mapping(address => struct PrometheusToken.DataSet storage ref[] storage ref)"
+                        }
+                      },
+                      "id": 125,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 124,
+                        "name": "_user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 94,
+                        "src": "1692:5:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1687:11:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_struct$_DataSet_$27_storage_$dyn_storage",
+                        "typeString": "struct PrometheusToken.DataSet storage ref[] storage ref"
+                      }
+                    },
+                    "id": 127,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 126,
+                      "name": "id",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 96,
+                      "src": "1699:2:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "1687:15:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_DataSet_$27_storage",
+                      "typeString": "struct PrometheusToken.DataSet storage ref"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1662:40:0"
+                },
                 {
                   "expression": {
                     "argumentTypes": null,
@@ -1243,7 +1575,7 @@
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberName": "tripduration",
+                        "memberName": "distance",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 78,
                         "src": "1248:28:2",
@@ -1326,7 +1658,7 @@
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberName": "km",
+                        "memberName": "avgVehicleSpeed",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 80,
                         "src": "1290:18:2",
@@ -1409,7 +1741,7 @@
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberName": "vehicle_speed",
+                        "memberName": "tripDuration",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 82,
                         "src": "1322:29:2",
@@ -1492,7 +1824,7 @@
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberName": "engine_load",
+                        "memberName": "countPassengers",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 84,
                         "src": "1365:27:2",
@@ -1658,13 +1990,13 @@
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberName": "gps",
+                        "memberName": "driverGender",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 88,
                         "src": "1446:19:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_string_storage",
-                          "typeString": "string storage ref"
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
                         }
                       }
                     ],
@@ -1677,8 +2009,8 @@
                     "nodeType": "TupleExpression",
                     "src": "1234:241:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_tuple$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_string_storage_$",
-                      "typeString": "tuple(uint256,uint256,uint256,uint256,uint256,string storage ref)"
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
                     }
                   },
                   "functionReturnParameters": 169,
@@ -1710,8 +2042,8 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
                   },
                   "typeName": {
                     "id": 152,
@@ -1719,8 +2051,8 @@
                     "nodeType": "ElementaryTypeName",
                     "src": "1139:7:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
                     }
                   },
                   "value": null,
@@ -1900,8 +2232,8 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
                   },
                   "typeName": {
                     "id": 167,
@@ -1909,8 +2241,60 @@
                     "nodeType": "ElementaryTypeName",
                     "src": "1209:6:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 117,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 154,
+                  "src": "1618:4:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 116,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1618:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 119,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 154,
+                  "src": "1632:4:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 118,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1632:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
                     }
                   },
                   "value": null,
@@ -2234,8 +2618,34 @@
         "unitAlias": ""
       },
       {
-        "baseContracts": [],
-        "contractDependencies": [],
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3,
+              "name": "MintableToken",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 625,
+              "src": "126:13:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MintableToken_$625",
+                "typeString": "contract MintableToken"
+              }
+            },
+            "id": 4,
+            "nodeType": "InheritanceSpecifier",
+            "src": "126:13:0"
+          }
+        ],
+        "contractDependencies": [
+          348,
+          444,
+          487,
+          519,
+          625,
+          872
+        ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
@@ -2390,8 +2800,8 @@
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_string_storage_ptr",
-                  "typeString": "string"
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
                 },
                 "typeName": {
                   "id": 87,
@@ -2399,8 +2809,34 @@
                   "nodeType": "ElementaryTypeName",
                   "src": "279:6:2",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_string_storage_ptr",
-                    "typeString": "string"
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26,
+                "name": "birthYear",
+                "nodeType": "VariableDeclaration",
+                "scope": 27,
+                "src": "438:14:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 25,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "438:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
                   }
                 },
                 "value": null,
@@ -2521,15 +2957,211 @@
                       "referencedDeclaration": 98,
                       "src": "405:5:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_address",
-                        "typeString": "address"
+                        "typeIdentifier": "t_struct$_DataSet_$27_memory_ptr",
+                        "typeString": "struct PrometheusToken.DataSet"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 59,
+                        "name": "DataSet",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 27,
+                        "src": "885:7:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_DataSet_$27_storage_ptr",
+                          "typeString": "struct PrometheusToken.DataSet"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 74,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 62,
+                        "name": "_timestamp",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 34,
+                        "src": "931:10:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 63,
+                        "name": "_gps",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 36,
+                        "src": "955:4:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 64,
+                        "name": "_distance",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 38,
+                        "src": "973:9:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 65,
+                        "name": "_avgVehicleSpeed",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 40,
+                        "src": "996:16:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 66,
+                        "name": "_tripDuration",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 42,
+                        "src": "1026:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 67,
+                        "name": "_countPassengers",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 44,
+                        "src": "1053:16:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 68,
+                        "name": "_totalAcceleration",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 46,
+                        "src": "1083:18:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 69,
+                        "name": "_avgEngineLoad",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 48,
+                        "src": "1115:14:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 70,
+                        "name": "_batteryLvl",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50,
+                        "src": "1143:11:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 71,
+                        "name": "_driverGender",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 52,
+                        "src": "1168:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 72,
+                        "name": "_birthYear",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 54,
+                        "src": "1195:10:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
                       }
-                    },
-                    "nodeType": "Assignment",
-                    "operator": "=",
-                    "rightHandSide": {
-                      "argumentTypes": null,
-                      "arguments": [
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
                         {
                           "argumentTypes": null,
                           "id": 103,
@@ -2619,8 +3251,8 @@
                     "nodeType": "ElementaryTypeName",
                     "src": "380:7:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
+                      "typeIdentifier": "t_struct$_DataSet_$27_memory",
+                      "typeString": "struct PrometheusToken.DataSet memory"
                     }
                   },
                   "value": null,
@@ -2968,8 +3600,8 @@
                       "referencedDeclaration": 670,
                       "src": "1000:10:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$returns$_t_bool_$",
-                        "typeString": "function (address,uint256) external returns (bool)"
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$_t_bool_$",
+                        "typeString": "function (address,uint256) returns (bool)"
                       }
                     },
                     "id": 146,
@@ -3142,8 +3774,8 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
                   },
                   "typeName": {
                     "id": 117,
@@ -3151,8 +3783,8 @@
                     "nodeType": "ElementaryTypeName",
                     "src": "679:4:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
                     }
                   },
                   "value": null,
@@ -3168,8 +3800,8 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
                   },
                   "typeName": {
                     "id": 119,
@@ -3177,8 +3809,8 @@
                     "nodeType": "ElementaryTypeName",
                     "src": "706:6:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
                     }
                   },
                   "value": null,
@@ -3233,6 +3865,111 @@
               "nodeType": "Block",
               "src": "1217:265:2",
               "statements": [
+                {
+                  "assignments": [
+                    122
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 122,
+                      "name": "dataset",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 154,
+                      "src": "1662:22:0",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_DataSet_$27_memory_ptr",
+                        "typeString": "struct PrometheusToken.DataSet"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 121,
+                        "name": "DataSet",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 27,
+                        "src": "1662:7:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_DataSet_$27_storage_ptr",
+                          "typeString": "struct PrometheusToken.DataSet"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 128,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 123,
+                        "name": "data",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 32,
+                        "src": "1687:4:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_array$_t_struct$_DataSet_$27_storage_$dyn_storage_$",
+                          "typeString": "mapping(address => struct PrometheusToken.DataSet storage ref[] storage ref)"
+                        }
+                      },
+                      "id": 125,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 124,
+                        "name": "_user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 94,
+                        "src": "1692:5:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1687:11:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_struct$_DataSet_$27_storage_$dyn_storage",
+                        "typeString": "struct PrometheusToken.DataSet storage ref[] storage ref"
+                      }
+                    },
+                    "id": 127,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 126,
+                      "name": "id",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 96,
+                      "src": "1699:2:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "1687:15:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_DataSet_$27_storage",
+                      "typeString": "struct PrometheusToken.DataSet storage ref"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1662:40:0"
+                },
                 {
                   "expression": {
                     "argumentTypes": null,
@@ -3311,7 +4048,7 @@
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberName": "tripduration",
+                        "memberName": "timestamp",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 78,
                         "src": "1248:28:2",
@@ -3394,7 +4131,7 @@
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberName": "km",
+                        "memberName": "gps",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 80,
                         "src": "1290:18:2",
@@ -3477,7 +4214,7 @@
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberName": "vehicle_speed",
+                        "memberName": "avgVehicleSpeed",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 82,
                         "src": "1322:29:2",
@@ -3560,7 +4297,7 @@
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberName": "engine_load",
+                        "memberName": "batteryLvl",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 84,
                         "src": "1365:27:2",
@@ -3643,13 +4380,13 @@
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberName": "batteryLvl",
+                        "memberName": "driverGender",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 86,
                         "src": "1406:26:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_uint256",
-                          "typeString": "uint256"
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
                         }
                       },
                       {
@@ -3726,13 +4463,13 @@
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberName": "gps",
+                        "memberName": "birthYear",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 88,
                         "src": "1446:19:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_string_storage",
-                          "typeString": "string storage ref"
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
                         }
                       }
                     ],
@@ -3745,8 +4482,8 @@
                     "nodeType": "TupleExpression",
                     "src": "1234:241:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_tuple$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_string_storage_$",
-                      "typeString": "tuple(uint256,uint256,uint256,uint256,uint256,string storage ref)"
+                      "typeIdentifier": "t_tuple$_t_uint256_$_t_string_memory_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_bool_$_t_uint256_$",
+                      "typeString": "tuple(uint256,string memory,uint256,uint256,uint256,uint256,uint256,uint256,uint256,bool,uint256)"
                     }
                   },
                   "functionReturnParameters": 169,
@@ -3968,8 +4705,8 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
                   },
                   "typeName": {
                     "id": 167,
@@ -3977,8 +4714,86 @@
                     "nodeType": "ElementaryTypeName",
                     "src": "1209:6:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 115,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 154,
+                  "src": "1604:4:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 114,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1604:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 117,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 154,
+                  "src": "1618:4:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 116,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1618:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 119,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 154,
+                  "src": "1632:4:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 118,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1632:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
                     }
                   },
                   "value": null,
@@ -4278,8 +5093,8 @@
     "4": {
       "events": {},
       "links": {},
-      "address": "0x286ab07f11f80510830677948002bc65a92565f2",
-      "transactionHash": "0xcc96d82d910f1e5202e2f84def8872da632230b9d394e05d75131d86fca78d9d"
+      "address": "0x397f9f219e14be4b8b042f047b33ec310170012a",
+      "transactionHash": "0xb2979927ee407c9c1b25fc78f32c2e8202f4407025437779ecaff6ceb7c7109a"
     },
     "4447": {
       "events": {},
@@ -4298,6 +5113,12 @@
       "links": {},
       "address": "0x34bca7c5257382f98dbd3df18e5c9c7d74f4e8fc",
       "transactionHash": "0xcdd271e61f986be9bc06869ec07a33133c3553958e07a1089788c459d064bc7f"
+    },
+    "1531926194572": {
+      "events": {},
+      "links": {},
+      "address": "0xd68eb7e9389c3012a2b3999c53101b421e58f672",
+      "transactionHash": "0x87a01c131a660db6d7afd2aed4a12043a672cef861fcb2ae5bcf0b9b80051836"
     }
   },
   "schemaVersion": "2.0.1",
