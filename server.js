@@ -25,8 +25,8 @@ const sendAndSignTx = async () => {
     const tx = {
         from: account.address,
         to: contract.options.address,
-        data: contract.methods.addDataSet("23:30:00 - 2018.07.17", "48.787847, 11.379489", 926, 10, 89, 4, 5, 4, 10, 5, 3, "Male", 1990).encodeABI(), // Encodes the Method and Parameter into Hex
-        gas: await contract.methods.addDataSet("23:30:00 - 2018.07.17", "48.787847, 11.379489", 926, 10, 89, 4, 5, 4, 10, 5, 3, "Male", 1990).estimateGas(), // Estimates Gas for Method Execution
+        data: contract.methods.addDataSet(926, 10, 89, 4, 5, "48.787847, 11.379489").encodeABI(), // Encodes the Method and Parameter into Hex
+        gas: await contract.methods.addDataSet(926, 10, 89, 4, 5, "48.787847, 11.379489").estimateGas(), // Estimates Gas for Method Execution
     };
 
     // Sign Transaction with Web3 Account Object
