@@ -24,7 +24,6 @@ const sendAndSignTx = async () => {
     const contract = new web3.eth.Contract(artifact.abi);
     contract.options.address = artifact.networks[id].address;
 
-    contract.methods.getDataSetOf("0xe1b01597924979d001d4d9f6dd784fbb9306e099", 0).call().then(console.log).catch(console.error)
     const data = {
         timestamp: new Date().getTime(),
         gps: "52.101230;10.123132",
@@ -43,8 +42,20 @@ const sendAndSignTx = async () => {
     const tx = {
         from: account.address,
         to: contract.options.address,
-        data: contract.methods.addDataSet(926, 10, 89, 4, 5, 4878784711379489).encodeABI(), // Encodes the Method and Parameter into Hex
-        gas: await contract.methods.addDataSet(926, 10, 89, 4, 5, 4878784711379489).estimateGas(), // Estimates Gas for Method Execution
+        data: contract.methods.addDataSet(
+            data.timestamp,
+            data.gps,
+            data.tripduration,
+            data.distance,
+            data.avgVehicleSpeed,
+            data.countPassengers,
+            data.totalAcceleration,
+            data.avgEngineLoad,
+            data.batteryLvl,
+            data.driverGender,
+            data.birthYear
+        ).encodeABI(), // Encodes the Method and Parameter into Hex
+        gas: 800000 // Estimates Gas for Method Execution
     };
 
     // Sign Transaction with Web3 Account Object
