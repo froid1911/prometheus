@@ -13,12 +13,12 @@
 </section>
 <br>
 <div class="container">
-  <h1 class="title">Fetch Data</h1>
+  <h1 class="title">Shared Data from your Audi</h1>
   <h1 class="title is-4 is-info help">{{status}}</h1>
 
   <form #coinForm="ngForm">
     <div class="field">
-      <label class="label">Address</label>
+      <label class="label">Please provide your Wallet Address</label>
       <p class="control">
         <input [(ngModel)]="carAddress" class="input" type="text" placeholder="95" name="carAddress" required #carAddressModel="ngModel">
       </p>
@@ -32,11 +32,14 @@
     <div class="field is-grouped">
       <p class="control">
         <button [disabled]="!coinForm.valid" (click)="getDataSets()" class="button is-primary">
-          Send
+          Analyze
         </button>
       </p>
     </div>
   </form>
+  <p>
+      <br>
+  </p>
   <table>
     <tr>
       <th>ID</th>
@@ -52,8 +55,5 @@
     </tr>
 
   </table>
-  <strong>Hint:</strong> open the browser developer console to view any errors and warnings.
-
-
 
 </div>

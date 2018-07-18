@@ -1,3 +1,32 @@
 .has-underline {
   text-decoration: underline;
 }
+
+.hero.is-info.is-bold {
+    background-image: url("./img/bg_img.png");
+}
+
+.button.is-primary {
+    background-color: #bb0a30;
+    border-color: transparent;
+    color: #fff;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 1s;
+}
+
+.button.is-primary:hover {
+    background-color: #666666;
+    border-color: transparent;
+    color: #fff;
+}
+
+.title.is-4 {
+    font-size: 1.5rem;
+    color: #000000;
+}
+
+table th {
+    background-color: #bb0a30;
+    color: #FFFFFF;
+    padding-left: 5px;
+}
