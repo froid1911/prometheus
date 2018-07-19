@@ -3,9 +3,70 @@
 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
-	<style>
-	</style>
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+	<style>
+	.has-underline {
+		text-decoration: underline;
+	}
+
+	.hero.is-info.is-bold {
+			background-image: url("./img/bg_img.png");
+	}
+
+	.button.is-primary {
+			background-color: #bb0a30;
+			border-color: transparent;
+			color: #fff;
+			-webkit-transition-duration: 0.4s; /* Safari */
+			transition-duration: 1s;
+	}
+
+	.button.is-primary:hover {
+			background-color: #666666;
+			border-color: transparent;
+			color: #fff;
+	}
+
+	.title.is-1 {
+			font-size: 3rem;
+			font-weight: bold;
+			color: #000000;
+	}
+
+	.title.is-4 {
+			font-size: 1.5rem;
+			color: #000000;
+	}
+
+	table, th, td {
+			padding: 5px;
+	}
+
+	th, td {
+			border-bottom: 1px solid #ddd;
+	}
+
+	tr:hover {background-color: #b6b1a9;}
+
+	tr:nth-child(even) {background-color: #f2f2f2;}
+
+	table th {
+			background-color: #bb0a30;
+			color: #FFFFFF;
+			font-size: 0.8rem;
+			text-align: right;
+	}
+
+	table td {
+			font-size: 0.7rem;
+			text-align: right;
+	}
+
+	</style>
+
+
 	<script>
 		let xhr;
 		function redraw() {
@@ -169,7 +230,6 @@
 
 		var currentData = {};
 
-
 		$(document).ready(function(){
 		   // jQuery methods go here...
 
@@ -244,55 +304,46 @@
 
 		<div style="position:absolute; left:650px; top:50px;" class="mapouter">
 			<div class="gmap_canvas">
-		  <iframe id="map" width="400" height="500" id="gmap_canvas"
+		  <iframe id="map" width="600" height="350" id="gmap_canvas"
 			src="https://maps.google.com/maps?q=48.7785522,11.3975682&t=&z=13&ie=UTF8&iwloc=&output=embed"
 			frameborder="0" scrolling="no" marginheight="0" marginwidth="0">	</iframe>
 			</div>
 		</div>
 
-		<input id="clickMe" type="button" value="clickme" onclick="executeMe();" />
+		<input id="clickMe" type="button" value="Sell data" style='Background-color: #6EC8FF;
+				font-family:Bradley Hand ITC; font-size: 24; font-weight: bold' onclick="executeMe();" />
 
-		<table>
-			<tr>
-				<th>Type</th>
-				<th>Value</th>
-			</tr>
+<table table style="width:1000px">
+	<tr>
+		<th>Timestamp</th>
+		<th>GPS</th>
+		<th>Tripduration</th>
+		<th>KM</th>
+		<th>Vehicle Speed</th>
+		<th>Passengers</th>
+		<th>Acceleration</th>
+		<th>lateralAcceleration</th>
+		<th>Engine Load</th>
+		<th>Battery Level</th>
+		<th>Autonomous Driving</th>
+		<th>Aircondition Status</th>
+	</tr>
+	<tr>
+		<td> <input id="timestamp" type="input" value="timestamp"> </td>
+		<td> <input id="gps" type="input" value="gps"> </td>
+		<td> <input id="tripduration" type="input" value="tripduration"> </td>
+		<td> <input id="distance" type="input" value="distance"> </td>
+		<td> <input id="avgVehicleSpeed" type="input" value="avgVehicleSpeed"> </td>
+		<td> <input id="countPassengers" type="input" value="countPassengers"> </td>
+		<td> <input id="totalAcceleration" type="input" value="totalAcceleration"> </td>
+		<td> <input id="lateralAcceleration" type="input" value="lateralAcceleration"> </td>
+		<td> <input id="avgEngineLoad" type="input" value="avgEngineLoad"> </td>
+		<td> <input id="batteryLvl" type="input" value="batteryLvl"> </td>
+		<td> <input id="driverGender" type="checkbox" value="true"> </td>
+		<td> <input id="birthYear" type="input" value="birthYear"> </td>
+	</tr>
 
-			<div id="dataTable">
-			</div>
-
-
-		</table>
-
-
-<table>
-	<tr><td> <input id="timestamp" type="input" value="timestamp"> </td></tr>
-	<tr><td> <input id="gps" type="input" value="gps"> </td></tr>
-	<tr><td> <input id="tripduration" type="input" value="tripduration"> </td></tr>
-	<tr><td> <input id="distance" type="input" value="distance"> </td></tr>
-	<tr><td> <input id="avgVehicleSpeed" type="input" value="avgVehicleSpeed"> </td></tr>
-	<tr><td> <input id="countPassengers" type="input" value="countPassengers"> </td></tr>
-	<tr><td> <input id="totalAcceleration" type="input" value="totalAcceleration"> </td></tr>
-	<tr><td> <input id="lateralAcceleration" type="input" value="lateralAcceleration"> </td></tr>
-	<tr><td> <input id="avgEngineLoad" type="input" value="avgEngineLoad"> </td></tr>
-	<tr><td> <input id="batteryLvl" type="input" value="batteryLvl"> </td></tr>
-	<tr><td> <input id="driverGender" type="checkbox" value="true"> </td></tr>
-	<tr><td> <input id="birthYear" type="input" value="birthYear"> </td></tr>
 </table>
-<br>
-Notes:
-		timestamp: new Date().getTime(),
-		gps: "48.12345,11.12345",
-		tripduration: 900,
-		distance: 2051,
-		avgVehicleSpeed: 60,
-		countPassengers: 4,
-		totalAcceleration: 10,
-		lateralAcceleration: 3,
-		avgEngineLoad: 75,
-		batteryLvl: 80,
-		driverGender: true, //autonomous driving
-		birthYear: 80, //aircon status
 
 </body>
 
