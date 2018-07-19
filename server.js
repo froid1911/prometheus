@@ -2,11 +2,8 @@
 const Web3 = require('web3');
 const artifact = require('./build/contracts/PrometheusToken.json');
 
-// https://rinkeby.etherscan.io/address/0x765497F9E22387231e7B093Fe0b544046f58c865
-const privateKey = "0xe0c1e58a302e47581190b214ba3c3e566d6c884b649133566c09b43a67226778";
-// alt
 // https://rinkeby.etherscan.io/address/0xe1b01597924979d001d4d9f6dd784fbb9306e099
-// const privateKey = "0xd48550009e7fa0930429cfc24d8ad8f46eceea2e7cf5931671a07d566bd825f1";
+const privateKey = "0xd48550009e7fa0930429cfc24d8ad8f46eceea2e7cf5931671a07d566bd825f1";
 const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://rinkeby.infura.io/ws')); // Websocket to Infura Geth API
 
 // ganache-cli
