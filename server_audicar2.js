@@ -26,16 +26,16 @@ const sendAndSignTx = async () => {
     const data = {
         timestamp: new Date().getTime(),
         gps: "52.101230;10.123132",
-        tripduration: 900,
-        distance: 210,
-        avgVehicleSpeed: 60,
-        countPassengers: 4,
-        totalAcceleration: 10,
-        lateralAcceleration: 3,
-        avgEngineLoad: 75,
-        batteryLvl: 80,
-        driverGender: true,
-        birthYear: 80
+        tripduration: 1000,
+        distance: 410,
+        avgVehicleSpeed: 88,
+        countPassengers: 2,
+        totalAcceleration: 60,
+        lateralAcceleration: 18,
+        avgEngineLoad: 60,
+        batteryLvl: 75,
+        driverGender: false,
+        birthYear: 50
     }
     // Create Transaction
     const tx = {
