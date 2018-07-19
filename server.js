@@ -13,10 +13,9 @@ const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://rinkeby.infura
 // const privateKey = "0xe03010f58f7ae15a89f8b414522680543564a9c8174df5784d4169112cdcee76";
 // const web3 = new Web3('http://localhost:8545'); // For Local Connect
 
-console.log(account.address);
 // Load Private Key and create Web3 JavaScript Account Object
 const account = web3.eth.accounts.privateKeyToAccount(privateKey);
-
+console.log(account.address);
 // Send and Signs Default Tx
 const sendAndSignTx = async () => {
 
