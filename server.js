@@ -30,12 +30,13 @@ const sendAndSignTx = async () => {
         tripduration: 900,
         distance: 210,
         avgVehicleSpeed: 60,
-        totalAcceleration: 8,
+        countPassengers: 4,
+        totalAcceleration: 10,
         lateralAcceleration: 3,
-        avgEngineLoad: 100,
-        batteryLvl: 100,
+        avgEngineLoad: 75,
+        batteryLvl: 80,
         driverGender: true,
-        birthYear: 80,
+        birthYear: 80
     }
     // Create Transaction
     const tx = {
