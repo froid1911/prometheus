@@ -21,61 +21,57 @@ const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://rinkeby.infura
 // Load Private Key and create Web3 JavaScript Account Object
 const account = web3.eth.accounts.privateKeyToAccount(privateKey);
 
-// TODO Parameter eintragen
-const sendAndSignTx = async (parameters) => {
 
-    /*this is the data we want to transfer. However smart contract seems to be
-    broken. Hence, this transData is not used currently */
-    var transData = [
-      parameters["tripduration"],
-      parameters["km"],
-      parameters["speed"],
-      parameters["engine_load"],
-      parameters["battery"],
-      parameters["gps"]
-    ];
+const sendAndSignTx = async (data) => {
 
-    console.log("transData " + transData);
-    // Get Network ID
-    const id = await web3.eth.net.getId();
+  // Get Network ID
+  const id = await web3.eth.net.getId();
 
-    // Intantiate Web3 Contract Object with Address from Truffle Contract Definition File
-    const contract = new web3.eth.Contract(artifact.abi);
-    contract.options.address = artifact.networks[id].address;
+  // Intantiate Web3 Contract Object with Address from Truffle Contract Definition File
+  const contract = new web3.eth.Contract(artifact.abi);
+  contract.options.address = artifact.networks[id].address;
 
-    // Create Transaction
-    const tx = {
-        from: account.address,
-        to: contract.options.address,
-        data: contract.methods.addDataSet(926, 10, 89, 4, 5, 4878784711379489).encodeABI(), // Encodes the Method and Parameter into Hex
-        gas: await contract.methods.addDataSet(926, 10, 89, 4, 5, 4878784711379489).estimateGas(), // Estimates Gas for Method Execution
-    };
+  // Create Transaction
+  const tx = {
+      from: account.address,
+      to: contract.options.address,
+      data: contract.methods.addDataSet(
+          data.timestamp,
+          data.gps,
+          data.tripduration,
+          data.distance,
+          data.avgVehicleSpeed,
+          data.countPassengers,
+          data.totalAcceleration,
+          data.avgEngineLoad,
+          data.batteryLvl,
+          data.driverGender,
+          data.birthYear
+      ).encodeABI(), // Encodes the Method and Parameter into Hex
+      gas: 800000 // Estimates Gas for Method Execution
+  };
 
-    // Sign Transaction with Web3 Account Object
-    // const signedTx = await account.signTransaction(tx);
-    // console.log("Signed Tx: " + signedTx.rawTransaction);
+  // Sign Transaction with Web3 Account Object
+  const signedTx = await account.signTransaction(tx);
+  console.log(signedTx);
 
-    // Send signed Transaction with Web3
-    // web3.eth.sendSignedTransaction(signedTx.rawTransaction).then(receipt => {
-    //     console.log(receipt);
-    //     process.exit(0);
-    // })
+  // Send signed Transaction with Web3
+  web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+      .then(receipt => {
+          console.log(receipt);
+          process.exit(0);
+      }).catch(((error) => {
+          console.error(error);
+          process.exit(1);
+      }));
 
 }
-
-app.get('/', (req, res) => res.send('transaction works!'));
-
-app.get('/test', (req, res) => res.send('transaction!'));
 
 // POST API for transaction
 app.post('/transaction', (req, res) => {
 
-  // TODO aus POST Request vom Frontend auslesen
   const parameters = req.body
-  console.log("Typeof req.body" + typeof(req.body))
-  //var json = '{"result":true,"count":1}',
-  //parObj = JSON.parse(parameters);
-  console.log("----------------Request-payload------------------------")
+  console.log("----------------received Request-payload------------------------")
   console.log(parameters);
   console.log("----------------------------------------")
 
@@ -83,7 +79,7 @@ app.post('/transaction', (req, res) => {
     console.log(k + " = " + parameters[k])
   }
 
-  // TODO parameter übergeben
+  // initiate transaction
   sendAndSignTx(parameters);
 
   res.send('success!')

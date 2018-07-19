@@ -137,14 +137,22 @@ function readTextFile(file)
 
 function sendPost() {
 	var payload = JSON.stringify({
-		tripduration : "03:00:00",
-    km : 15500,
-    speed : 40,
-    engine_load : 3,
-    battery : 80,
-		gps: "48.12345,11.12345"
+		timestamp : new Date().getTime(),
+    gps : "48.12345,11.12345",
+    tripduration : 900,
+    distance : 2051,
+    avgVehicleSpeed : 60,
+    countPassengers : 4,
+    totalAcceleration : 10,
+    lateralAcceleration : 3,
+    avgEngineLoad : 75,
+    batteryLvl : 80,
+    driverGender : true, //autonomous driving
+    birthYear : 80, //aircon status
 	});
 
+
+  // send data payload as post request to server.js for transaction
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "http://localhost:3000/transaction", true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
