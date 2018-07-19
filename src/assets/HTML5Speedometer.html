@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+ </td></tr><!DOCTYPE html>
 <html>
 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
 	<style>
 	</style>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script>
 		let xhr;
 		function redraw() {
@@ -22,7 +23,7 @@
 				rawFile.send(null);
 			}
 			//	alert(document.getElementById("myList").value);
-			draw(document.getElementById("myList").value);
+			draw(document.getElementById("avgVehicleSpeed").value);
 		}
 		function draw(speed) {
 
@@ -126,8 +127,8 @@
 			rawFile.send(null);
 		}
 
-		function sendPost() {
-			var payload = JSON.stringify({
+		function sendPost(currentData) {
+			var payload = {
 				timestamp: new Date().getTime(),
 				gps: "48.12345,11.12345",
 				tripduration: 900,
@@ -140,7 +141,9 @@
 				batteryLvl: 80,
 				driverGender: true, //autonomous driving
 				birthYear: 80, //aircon status
-			});
+			};
+
+			var payload = currentData;
 
 
 			// send data payload as post request to server.js for transaction
@@ -153,15 +156,79 @@
 					console.log(xhr.responseText);
 				}
 			}
-			xhr.send(payload);
-			alert("Data to be transferred: \n" + payload);
+			xhr.send(JSON.stringify(payload));
+			alert("Data to be transferred: \n" + JSON.stringify(payload));
 
 			//// TODO: error handling; show response from server
 		}
 
 		function executeMe() {
 			// readTextFile("http://localhost:4200/assets/test.txt");
-			sendPost();
+			sendPost(currentData);
+		}
+
+		var currentData = {};
+
+
+		$(document).ready(function(){
+		   // jQuery methods go here...
+
+			 const defaultData = {
+				 timestamp: new Date().getTime(),
+				 gps: "48.12345,11.12345",
+				 tripduration: 900,
+				 distance: 2051,
+				 avgVehicleSpeed: 60,
+				 countPassengers: 4,
+				 totalAcceleration: 10,
+				 lateralAcceleration: 3,
+				 avgEngineLoad: 75,
+				 batteryLvl: 80,
+				 driverGender: true, //autonomous driving
+				 birthYear: 80, //aircon status
+			 };
+
+			 currentData = defaultData;
+
+			 //prefill input fields with default data
+			 $('#timestamp').val(currentData.timestamp);
+			 $('#gps').val(currentData.gps);
+			 $('#tripduration').val(currentData.tripduration);
+			 $('#distance').val(currentData.distance);
+			 $('#avgVehicleSpeed').val(currentData.avgVehicleSpeed);
+			 $('#countPassengers').val(currentData.countPassengers);
+			 $('#totalAcceleration').val(currentData.totalAcceleration);
+			 $('#lateralAcceleration').val(currentData.lateralAcceleration);
+			 $('#avgEngineLoad').val(currentData.avgEngineLoad);
+			 $('#batteryLvl').val(currentData.batteryLvl);
+			 $('#driverGender').val(currentData.driverGender);
+			 $('#birthYear').val(currentData.birthYear);
+
+
+			 updateWidgets();
+
+			 $('#avgVehicleSpeed').change(function(){
+ 			 	updateWidgets();
+			 });
+
+		});
+
+		// function to update currentData and redraw all widgets with currentData
+		function updateWidgets() {
+			currentData.timestamp = $('#timestamp').val();
+			currentData.gps = $('#gps').val();
+			currentData.tripduration = $('#tripduration').val();
+			currentData.distance = $('#distance').val();
+			currentData.avgVehicleSpeed = $('#avgVehicleSpeed').val();
+			currentData.countPassengers = $('#countPassengers').val();
+			currentData.totalAcceleration = $('#totalAcceleration').val();
+			currentData.lateralAcceleration = $('#lateralAcceleration').val();
+			currentData.avgEngineLoad = $('#avgEngineLoad').val();
+			currentData.batteryLvl = $('#batteryLvl').val();
+			currentData.driverGender = $('#driverGender').val();
+			currentData.birthYear = $('#birthYear').val();
+
+			redraw(); //update speedometer
 		}
 
 
@@ -202,6 +269,36 @@ Change the speed in the dropdown to see the dial position change
 
 
 		</table>
+
+
+<table>
+	<tr><td> <input id="timestamp" type="input" value="timestamp"> </td></tr>
+	<tr><td> <input id="gps" type="input" value="gps"> </td></tr>
+	<tr><td> <input id="tripduration" type="input" value="tripduration"> </td></tr>
+	<tr><td> <input id="distance" type="input" value="distance"> </td></tr>
+	<tr><td> <input id="avgVehicleSpeed" type="input" value="avgVehicleSpeed"> </td></tr>
+	<tr><td> <input id="countPassengers" type="input" value="countPassengers"> </td></tr>
+	<tr><td> <input id="totalAcceleration" type="input" value="totalAcceleration"> </td></tr>
+	<tr><td> <input id="lateralAcceleration" type="input" value="lateralAcceleration"> </td></tr>
+	<tr><td> <input id="avgEngineLoad" type="input" value="avgEngineLoad"> </td></tr>
+	<tr><td> <input id="batteryLvl" type="input" value="batteryLvl"> </td></tr>
+	<tr><td> <input id="driverGender" type="checkbox" value="true"> </td></tr>
+	<tr><td> <input id="birthYear" type="input" value="birthYear"> </td></tr>
+</table>
+<br>
+Notes:
+		timestamp: new Date().getTime(),
+		gps: "48.12345,11.12345",
+		tripduration: 900,
+		distance: 2051,
+		avgVehicleSpeed: 60,
+		countPassengers: 4,
+		totalAcceleration: 10,
+		lateralAcceleration: 3,
+		avgEngineLoad: 75,
+		batteryLvl: 80,
+		driverGender: true, //autonomous driving
+		birthYear: 80, //aircon status
 
 </body>
 
