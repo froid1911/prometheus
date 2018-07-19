@@ -31,8 +31,26 @@
     color: #000000;
 }
 
+table, th, td {
+    padding: 5px;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: #b6b1a9;}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
 table th {
     background-color: #bb0a30;
     color: #FFFFFF;
-    padding-left: 5px;
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+table td {
+    font-size: 0.7rem;
+    text-align: right;
 }
