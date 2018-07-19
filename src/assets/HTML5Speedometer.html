@@ -130,7 +130,7 @@
 		function sendPost(currentData) {
 			var payload = {
 				timestamp: new Date().getTime(),
-				gps: "48.12345,11.12345",
+				gps: "48.7785522,11.3975682", //location Audi Forum
 				tripduration: 900,
 				distance: 2051,
 				avgVehicleSpeed: 60,
@@ -205,9 +205,9 @@
 			 $('#birthYear').val(currentData.birthYear);
 
 
-			 updateWidgets();
+//			 updateWidgets();
 
-			 $('#avgVehicleSpeed').change(function(){
+			 $(':input').change(function(){
  			 	updateWidgets();
 			 });
 
@@ -229,6 +229,8 @@
 			currentData.birthYear = $('#birthYear').val();
 
 			redraw(); //update speedometer
+			// reload map with current coordinates
+			$('#map').attr("src", "https://maps.google.com/maps?q=" + currentData.gps + "&t=&z=13&ie=UTF8&iwloc=&output=embed");
 		}
 
 
@@ -236,25 +238,17 @@
 </head>
 
 <body onload="draw(100);">
-	<div id="slider">
-		0 km/h
-		<input style="width:500px" id="slide" min="0" max="160" step="5" value="105" onchange="draw(this.value)" type="range"> 165 kmh
-		<!--
-</div>
-<div>
-Change the speed in the dropdown to see the dial position change
-<select id="myList" onchange="redraw();">
-  <option value="120" selected="selected">Speed = 120</option>
-  <option value="30">Speed = 30</option>
-  <option value="50">Speed = 50</option>
-  <option value="60">Speed = 60</option>
-  <option value="140">Speed = 140</option>
-  <option value="160">Speed = 160</option>
-</select>
-</div>
--->
+
 		<canvas class="canvas" id="myCanvas" width="600" height="600">
 			Your browser does not support the HTML5 canvas tag.</canvas>
+
+		<div style="position:absolute; left:650px; top:50px;" class="mapouter">
+			<div class="gmap_canvas">
+		  <iframe id="map" width="400" height="500" id="gmap_canvas"
+			src="https://maps.google.com/maps?q=48.7785522,11.3975682&t=&z=13&ie=UTF8&iwloc=&output=embed"
+			frameborder="0" scrolling="no" marginheight="0" marginwidth="0">	</iframe>
+			</div>
+		</div>
 
 		<input id="clickMe" type="button" value="clickme" onclick="executeMe();" />
 
