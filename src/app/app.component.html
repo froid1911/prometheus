@@ -42,16 +42,31 @@
   </p>
   <table>
     <tr>
-      <th>ID</th>
-      <th>KM</th>
-      <th>Battery Level</th>
+      <th>Timestamp</th>
       <th>GPS</th>
+      <th>Distance</th>
+      <th>Vehicle Speed</th>
+      <th>Tripduration</th>
+      <th>Passengers</th>
+      <th>Acceleration</th>
+      <th>Engine Load</th>
+      <th>Battery Level</th>
+      <th>Driver Gender</th>
+      <th>Birthyear</th>
     </tr>
     <tr *ngFor="let dataset of datasets; let i = index">
       <td>{{i}}</td>
       <td>{{dataset[0]}}</td>
       <td>{{dataset[1]}}</td>
       <td>{{dataset[2]}}</td>
+      <td>{{dataset[3]}}</td>
+      <td>{{dataset[4]}}</td>
+      <td>{{dataset[5]}}</td>
+      <td>{{dataset[6]}}</td>
+      <td>{{dataset[7]}}</td>
+      <td>{{dataset[8]}}</td>
+      <td>{{dataset[9]}}</td>
+      <td>{{dataset[10]}}</td>
     </tr>
 
   </table>
