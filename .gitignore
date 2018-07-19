@@ -30,7 +30,7 @@
 /libpeerconnection.log
 npm-debug.log
 testem.log
-/typings
+data/~$car_data.xlsx
 
 # e2e
 /e2e/*.js
