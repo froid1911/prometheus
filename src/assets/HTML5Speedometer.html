@@ -1,180 +1,178 @@
 <!DOCTYPE html>
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252">
-<style>
-</style>
-<script>
+<html>
 
-function redraw()
-{function readTextFile(file)
-{
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                alert(allText);
-            }
-        }
-    }
-    rawFile.send(null);
-}
-//	alert(document.getElementById("myList").value);
-	draw(document.getElementById("myList").value);
-}
-function draw(speed)
-{
-
-	  var  canvas = document.getElementById("myCanvas");
-	  var  context = canvas.getContext("2d");
-      context.clearRect(0,0,canvas.width, canvas.height);
-      var centerX = canvas.width / 2;
-      var centerY = canvas.height / 2;
-      var radius = canvas.height / 2 - 20;
-
-      context.beginPath();
-      context.arc(centerX, centerY, radius, Math.PI*0.10, Math.PI*-1.1, true);
-
-      var gradience = context.createRadialGradient(centerX, centerY, radius-radius/2, centerX, centerY, radius-radius/8);
-//       gradience.addColorStop(0, '#ff9000');
-         gradience.addColorStop(0, '#ffab00');
-       gradience.addColorStop(1, '#000000');
-
-       context.fillStyle = gradience;
-	   context.fill();
-	   context.closePath();
-       context.restore();
-
-	context.beginPath();
-	context.strokeStyle = '#ffff00';
-	context.translate(centerX,centerY);
-	var increment = 5;
-	context.font="15px Helvetica";
-	for (var i=-18; i<=18; i++)
-	{
-		angle = Math.PI/30*i;
-		sineAngle = Math.sin(angle);
-		cosAngle = -Math.cos(angle);
-
-		if (i % 5 == 0) {
-		context.lineWidth = 8;
-		iPointX = sineAngle *(radius -radius/4);
-		iPointY = cosAngle *(radius -radius/4);
-		oPointX = sineAngle *(radius -radius/7);
-		oPointY = cosAngle *(radius -radius/7);
-
-		wPointX = sineAngle *(radius -radius/2.5);
-		wPointY = cosAngle *(radius -radius/2.5);
-		context.fillText((i+18)*increment,wPointX-2,wPointY+4);
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<style>
+	</style>
+	<script>
+		let xhr;
+		function redraw() {
+			function readTextFile(file) {
+				var rawFile = new XMLHttpRequest();
+				rawFile.open("GET", file, false);
+				rawFile.onreadystatechange = function () {
+					if (rawFile.readyState === 4) {
+						if (rawFile.status === 200 || rawFile.status == 0) {
+							var allText = rawFile.responseText;
+							alert(allText);
+						}
+					}
+				}
+				rawFile.send(null);
+			}
+			//	alert(document.getElementById("myList").value);
+			draw(document.getElementById("myList").value);
 		}
-		else
-		{
-		context.lineWidth = 2;
-		iPointX = sineAngle *(radius -radius/5.5);
-		iPointY = cosAngle *(radius -radius/5.5);
-		oPointX = sineAngle *(radius -radius/7);
-		oPointY = cosAngle *(radius -radius/7);
+		function draw(speed) {
+
+			var canvas = document.getElementById("myCanvas");
+			var context = canvas.getContext("2d");
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			var centerX = canvas.width / 2;
+			var centerY = canvas.height / 2;
+			var radius = canvas.height / 2 - 20;
+
+			context.beginPath();
+			context.arc(centerX, centerY, radius, Math.PI * 0.10, Math.PI * -1.1, true);
+
+			var gradience = context.createRadialGradient(centerX, centerY, radius - radius / 2, centerX, centerY, radius - radius / 8);
+			//       gradience.addColorStop(0, '#ff9000');
+			gradience.addColorStop(0, '#ffab00');
+			gradience.addColorStop(1, '#000000');
+
+			context.fillStyle = gradience;
+			context.fill();
+			context.closePath();
+			context.restore();
+
+			context.beginPath();
+			context.strokeStyle = '#ffff00';
+			context.translate(centerX, centerY);
+			var increment = 5;
+			context.font = "15px Helvetica";
+			for (var i = -18; i <= 18; i++) {
+				angle = Math.PI / 30 * i;
+				sineAngle = Math.sin(angle);
+				cosAngle = -Math.cos(angle);
+
+				if (i % 5 == 0) {
+					context.lineWidth = 8;
+					iPointX = sineAngle * (radius - radius / 4);
+					iPointY = cosAngle * (radius - radius / 4);
+					oPointX = sineAngle * (radius - radius / 7);
+					oPointY = cosAngle * (radius - radius / 7);
+
+					wPointX = sineAngle * (radius - radius / 2.5);
+					wPointY = cosAngle * (radius - radius / 2.5);
+					context.fillText((i + 18) * increment, wPointX - 2, wPointY + 4);
+				}
+				else {
+					context.lineWidth = 2;
+					iPointX = sineAngle * (radius - radius / 5.5);
+					iPointY = cosAngle * (radius - radius / 5.5);
+					oPointX = sineAngle * (radius - radius / 7);
+					oPointY = cosAngle * (radius - radius / 7);
+				}
+				context.beginPath();
+				context.moveTo(iPointX, iPointY);
+				context.lineTo(oPointX, oPointY);
+				context.stroke();
+				context.closePath();
+
+			}
+
+			var numOfSegments = speed / increment;
+			numOfSegments = numOfSegments - 18;
+			angle = Math.PI / 30 * numOfSegments;
+			sineAngle = Math.sin(angle);
+			cosAngle = -Math.cos(angle);
+			pointX = sineAngle * (3 / 4 * radius);
+			pointY = cosAngle * (3 / 4 * radius);
+
+			context.beginPath();
+			context.strokeStyle = '#000000';
+			context.arc(0, 0, 19, 0, 2 * Math.PI, true);
+			context.fill();
+			context.closePath();
+
+			context.beginPath();
+			context.lineWidth = 6;
+
+			context.moveTo(0, 0);
+			context.lineTo(pointX, pointY);
+
+			context.stroke();
+			context.closePath();
+			context.restore();
+			context.translate(-centerX, -centerY);
 		}
-		context.beginPath();
-		context.moveTo(iPointX,iPointY);
-		context.lineTo(oPointX,oPointY);
-		context.stroke();
-		context.closePath();
 
-	}
+		function readTextFile(file) {
+			var rawFile = new XMLHttpRequest();
+			rawFile.open("GET", file, false);
+			rawFile.onreadystatechange = function () {
+				if (rawFile.readyState === 4) {
+					if (rawFile.status === 200 || rawFile.status == 0) {
+						var allText = rawFile.responseText;
+						console.log(
+							"content of " +
+							file.substring(file.lastIndexOf('/') + 1) + ": \n \n" +
+							allText
+						)
+					}
+				}
+			}
+			rawFile.send(null);
+		}
 
-	var numOfSegments = speed/increment;
-	numOfSegments = numOfSegments -18;
-	angle = Math.PI/30*numOfSegments;
-	sineAngle = Math.sin(angle);
-	cosAngle = -Math.cos(angle);
-	pointX = sineAngle *(3/4*radius);
-	pointY = cosAngle *(3/4*radius);
-
-	context.beginPath();
-	context.strokeStyle = '#000000';
-	context.arc(0, 0, 19, 0, 2*Math.PI, true);
-	context.fill();
-    context.closePath();
-
-	context.beginPath();
-	context.lineWidth=6;
-
-	context.moveTo(0,0);
-    context.lineTo(pointX,pointY);
-
-    context.stroke();
-    context.closePath();
-    context.restore();
-    context.translate(-centerX,-centerY);
-}
-
-function readTextFile(file)
-{
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-									console.log(
-										"content of "+
-										file.substring(file.lastIndexOf('/')+1) + ": \n \n" +
-									  allText
-									)
-            }
-        }
-    }
-    rawFile.send(null);
-}
-
-function sendPost() {
-	var payload = JSON.stringify({
-		timestamp : new Date().getTime(),
-    gps : "48.12345,11.12345",
-    tripduration : 900,
-    distance : 2051,
-    avgVehicleSpeed : 60,
-    countPassengers : 4,
-    totalAcceleration : 10,
-    lateralAcceleration : 3,
-    avgEngineLoad : 75,
-    batteryLvl : 80,
-    driverGender : true, //autonomous driving
-    birthYear : 80, //aircon status
-	});
+		function sendPost() {
+			var payload = JSON.stringify({
+				timestamp: new Date().getTime(),
+				gps: "48.12345,11.12345",
+				tripduration: 900,
+				distance: 2051,
+				avgVehicleSpeed: 60,
+				countPassengers: 4,
+				totalAcceleration: 10,
+				lateralAcceleration: 3,
+				avgEngineLoad: 75,
+				batteryLvl: 80,
+				driverGender: true, //autonomous driving
+				birthYear: 80, //aircon status
+			});
 
 
-  // send data payload as post request to server.js for transaction
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "http://localhost:3000/transaction", true);
-	xhr.setRequestHeader('Content-Type', 'application/json');
-	xhr.send(payload);
-	alert("Data to be transferred: \n" + payload);
+			// send data payload as post request to server.js for transaction
+			xhr = new XMLHttpRequest();
+			xhr.open("POST", "http://localhost:3000/transaction", true);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4) {
+					// WARNING! Might be evaluating an evil script!
+					console.log(xhr.responseText);
+				}
+			}
+			xhr.send(payload);
+			alert("Data to be transferred: \n" + payload);
 
-	//// TODO: error handling; show response from server
-}
+			//// TODO: error handling; show response from server
+		}
 
-function executeMe() {
-	// readTextFile("http://localhost:4200/assets/test.txt");
-	sendPost();
-}
+		function executeMe() {
+			// readTextFile("http://localhost:4200/assets/test.txt");
+			sendPost();
+		}
 
 
-</script>
+	</script>
 </head>
+
 <body onload="draw(100);">
-<div id="slider">
-0 km/h <input style="width:500px" id="slide" min="0" max="160" step="5" value="105" onchange="draw(this.value)" type="range">
-165 kmh
-<!--
+	<div id="slider">
+		0 km/h
+		<input style="width:500px" id="slide" min="0" max="160" step="5" value="105" onchange="draw(this.value)" type="range"> 165 kmh
+		<!--
 </div>
 <div>
 Change the speed in the dropdown to see the dial position change
@@ -188,21 +186,23 @@ Change the speed in the dropdown to see the dial position change
 </select>
 </div>
 -->
-<canvas class="canvas" id="myCanvas" width="600" height="600">
-Your browser does not support the HTML5 canvas tag.</canvas>
+		<canvas class="canvas" id="myCanvas" width="600" height="600">
+			Your browser does not support the HTML5 canvas tag.</canvas>
 
-<input id="clickMe" type="button" value="clickme" onclick="executeMe();" />
+		<input id="clickMe" type="button" value="clickme" onclick="executeMe();" />
 
-<table>
-	<tr>
-		<th>Type</th>
-		<th>Value</th>
-	</tr>
+		<table>
+			<tr>
+				<th>Type</th>
+				<th>Value</th>
+			</tr>
 
-	<div id="dataTable">
-	</div>
+			<div id="dataTable">
+			</div>
 
 
-</table>
+		</table>
 
-</body></html>
+</body>
+
+</html>

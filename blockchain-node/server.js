@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 app.use(express.json());
 
@@ -24,65 +24,68 @@ const account = web3.eth.accounts.privateKeyToAccount(privateKey);
 
 const sendAndSignTx = async (data) => {
 
-  // Get Network ID
-  const id = await web3.eth.net.getId();
+    return new Promise(async (resolve, reject) => {
+        // Get Network ID
+        const id = await web3.eth.net.getId();
 
-  // Intantiate Web3 Contract Object with Address from Truffle Contract Definition File
-  const contract = new web3.eth.Contract(artifact.abi);
-  contract.options.address = artifact.networks[id].address;
+        // Intantiate Web3 Contract Object with Address from Truffle Contract Definition File
+        const contract = new web3.eth.Contract(artifact.abi);
+        contract.options.address = artifact.networks[id].address;
 
-  // Create Transaction
-  const tx = {
-      from: account.address,
-      to: contract.options.address,
-      data: contract.methods.addDataSet(
-          data.timestamp,
-          data.gps,
-          data.tripduration,
-          data.distance,
-          data.avgVehicleSpeed,
-          data.countPassengers,
-          data.totalAcceleration,
-          data.avgEngineLoad,
-          data.batteryLvl,
-          data.driverGender,
-          data.birthYear
-      ).encodeABI(), // Encodes the Method and Parameter into Hex
-      gas: 800000 // Estimates Gas for Method Execution
-  };
+        // Create Transaction
+        const tx = {
+            from: account.address,
+            to: contract.options.address,
+            data: contract.methods.addDataSet(
+                data.timestamp,
+                data.gps,
+                data.tripduration,
+                data.distance,
+                data.avgVehicleSpeed,
+                data.countPassengers,
+                data.totalAcceleration,
+                data.avgEngineLoad,
+                data.batteryLvl,
+                data.driverGender,
+                data.birthYear
+            ).encodeABI(), // Encodes the Method and Parameter into Hex
+            gas: 800000 // Estimates Gas for Method Execution
+        };
 
-  // Sign Transaction with Web3 Account Object
-  const signedTx = await account.signTransaction(tx);
-  console.log(signedTx);
+        // Sign Transaction with Web3 Account Object
+        const signedTx = await account.signTransaction(tx);
+        console.log(signedTx);
 
-  // Send signed Transaction with Web3
-  web3.eth.sendSignedTransaction(signedTx.rawTransaction)
-      .then(receipt => {
-          console.log(receipt);
-          process.exit(0);
-      }).catch(((error) => {
-          console.error(error);
-          process.exit(1);
-      }));
+        // Send signed Transaction with Web3
+        web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+            .then(receipt => {
+                resolve(receipt);
+            }).catch(((error) => {
+                reject(error);
+            }));
+
+    })
 
 }
 
 // POST API for transaction
 app.post('/transaction', (req, res) => {
 
-  const parameters = req.body
-  console.log("----------------received Request-payload------------------------")
-  console.log(parameters);
-  console.log("----------------------------------------")
+    const parameters = req.body
+    console.log("----------------received Request-payload------------------------")
+    console.log(parameters);
+    console.log("----------------------------------------")
 
-  for(var k in parameters) {
-    console.log(k + " = " + parameters[k])
-  }
+    for (var k in parameters) {
+        console.log(k + " = " + parameters[k])
+    }
 
-  // initiate transaction
-  sendAndSignTx(parameters);
+    // initiate transaction
+    sendAndSignTx(parameters).then((data) => {
+        res.send(data)
+    });
 
-  res.send('success!')
+
 });
 
 app.listen(3000, () => console.log('blockchain-node running on 3000...'))
