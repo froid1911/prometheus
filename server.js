@@ -6,7 +6,7 @@ const artifact = require('./build/contracts/PrometheusToken.json');
 const privateKey = "0xd48550009e7fa0930429cfc24d8ad8f46eceea2e7cf5931671a07d566bd825f1";
 const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://rinkeby.infura.io/ws')); // Websocket to Infura Geth API
 
-// ganache-cli 
+// ganache-cli
 // const privateKey = "0xe03010f58f7ae15a89f8b414522680543564a9c8174df5784d4169112cdcee76";
 // const web3 = new Web3('http://localhost:8545'); // For Local Connect
 
@@ -27,16 +27,15 @@ const sendAndSignTx = async () => {
     const data = {
         timestamp: new Date().getTime(),
         gps: "52.101230;10.123132",
-        tripduration: 10,
-        distance: 10,
-        avgVehicleSpeed: 10,
-        totalAcceleration: 10,
-        lateralAcceleration: 10,
-        avgEngineLoad: 10,
-        batteryLvl: 10,
+        tripduration: 900,
+        distance: 210,
+        avgVehicleSpeed: 60,
+        totalAcceleration: 8,
+        lateralAcceleration: 3,
+        avgEngineLoad: 100,
+        batteryLvl: 100,
         driverGender: true,
-        birthYear: 1976,
-        countPassengers: 4
+        birthYear: 80,
     }
     // Create Transaction
     const tx = {
