@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Web3Service } from './web3.service';
 
 const prometheusArtifact = require('../../build/contracts/PrometheusToken.json');
-const tokenArtifact = require('../../build/contracts/MintableToken.json');
 @Injectable()
 export class PrometheusTokenService {
 
@@ -25,12 +24,6 @@ export class PrometheusTokenService {
     this.web3service.getNetworkId().subscribe((id) => {
       this.prometheus = new this.web3.eth.Contract(prometheusArtifact.abi);
       this.prometheus.options.address = prometheusArtifact.networks[id].address
-
-      this.prometheus.methods.getTokenAddress().call().then((address: string) => {
-        this.token = new this.web3.eth.Contract(tokenArtifact.abi);
-        this.token.options.address = address; // Fetched from Etherscan
-      })
-
     })
 
   }
@@ -65,7 +58,7 @@ export class PrometheusTokenService {
     return new Promise((resolve) => {
 
       // Get Balance from Contract as Call (read)
-      this.token.methods.balanceOf(address).call({ from: this.accounts[0] })
+      this.prometheus.methods.balanceOf(address).call({ from: this.accounts[0] })
         .then(async (value) => {
           resolve(value.valueOf());
         })
